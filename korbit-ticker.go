@@ -26,7 +26,7 @@ func slurp(url string) ([]byte, error) {
 
 type quote struct {
 	Timestamp int64
-	Last string
+	Last      string
 }
 
 func getQuote(currencyPair string) (quote, error) {
@@ -45,11 +45,11 @@ func main() {
 	fmt.Println("Refreshes every", interval, "minutes.")
 	for {
 		fmt.Println(time.Now())
-		for _, currencyPair := range []string{"btc_krw", "eth_krw", "etc_krw", "xrp_krw"} {
+		for _, currencyPair := range []string{"btc_krw", "eth_krw", "etc_krw", "xrp_krw", "bch_krw"} {
 			if q, err := getQuote(currencyPair); err != nil {
 				fmt.Println(err)
 			} else {
-				fmt.Println(currencyPair, ":", time.Unix(q.Timestamp / 1000, 0), q.Last)
+				fmt.Println(currencyPair, ":", time.Unix(q.Timestamp/1000, 0), q.Last)
 			}
 		}
 		time.Sleep(interval * time.Minute)
